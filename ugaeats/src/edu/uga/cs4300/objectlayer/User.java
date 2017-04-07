@@ -8,13 +8,24 @@ public class User {
 	private String password;
 	private String email;
 	
-	public User(int id, String fname, String lname, String uname, String email) {
+	
+	public User(int id, String fname, String lname, String uname, String password, String email) {
 		this.setId(id);
 		this.setFirst_name(fname);
 		this.setLast_name(lname);
 		this.setUsername(uname);
+		this.setPassword(password);
 		this.setEmail(email);
 	}
+	
+	public User(String fname, String lname, String uname, String password, String email) {
+		this.setFirst_name(fname);
+		this.setLast_name(lname);
+		this.setUsername(uname);
+		this.setPassword(password);
+		this.setEmail(email);
+	}
+	
 	
 	public int getId() {
 		return id;

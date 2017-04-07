@@ -48,7 +48,17 @@ public class RecipeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String signup = request.getParameter("signup");
+		String signin = request.getParameter("signon");
 		
+		if (signup != null)
+		{
+			
+		}
+		else if (signin != null)
+		{
+			
+		}
 	}
 
 }
