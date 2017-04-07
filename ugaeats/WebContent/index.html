@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Bradley Reeves
+	 Section 26666
+	 
+	 This is the index.html file for Project 3. It contains two
+	 buttons which take the user either to a page with allows
+	 you to create a movie or to a page that lets you choose
+	 a genre of movies to view. -->
+<meta charset="ISO-8859-1">
+<link href="CSS/index.css" type="text/css" rel="stylesheet"/>
+<title>IMDB2 Database</title>
+</head>
+<body>
+<form action="ReviewServlet" method="post">
+	<div class="center">
+		<h1>IMDB2 Database</h1>
+		<div class="inside">
+			<p>Create New Movie.</p>
+			<input type="submit" value="Show Movie Maker" name="showMaker"/>
+		</div>
+		<div class="inside">
+			<p>Show Movies By Genre</p>
+			<input type="submit" value="Choose a Genre" name="pickGenre"/>
+		</div>
+	</div>
+</form>
+</body>
+</html>

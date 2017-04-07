@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import edu.uga.cs4300.logiclayer.RecipeLogicImpl;
+
 /**
  * Servlet implementation class RecipeServlet
  */
@@ -53,11 +55,29 @@ public class RecipeServlet extends HttpServlet {
 		
 		if (signup != null)
 		{
-			
+			addNewUser(request, response);
 		}
 		else if (signin != null)
 		{
 			
+		}
+	}
+
+	private void addNewUser(HttpServletRequest request, HttpServletResponse response) {
+		String fname = request.getParameter("firstname");
+		String lname = request.getParameter("lastname");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		
+		RecipeLogicImpl userCtrl = new RecipeLogicImpl();
+		
+		userCtrl.addUser(fname, lname, username, password, email);
+		
+		try {
+			response.sendRedirect("signup.html");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

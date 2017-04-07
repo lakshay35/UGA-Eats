@@ -11,7 +11,9 @@ public class RecipePersistImpl {
 		String query = "INSERT INTO users (first_name,last_name,username,password,email) VALUES"
 				+ "('" + u.getFirst_name() + "','" + u.getLast_name() + "','"
 				+ u.getUsername() + "','" + u.getPassword() + "','" + u.getEmail() + "')";
-		return DbAccessImpl.create(c, query);
+		int temp = DbAccessImpl.create(c,  query);
+		DbAccessImpl.disconnect(c);
+		return temp;
 	} // persistUser()
 
 	
