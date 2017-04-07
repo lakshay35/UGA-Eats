@@ -59,7 +59,17 @@ public class RecipeServlet extends HttpServlet {
 		}
 		else if (signin != null)
 		{
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
 			
+			Connection connection = DbAccessImpl.connect();
+			String query = "SELECT * FROM users WHERE username = " + username + " AND password = " + password;
+			ResultSet rs = DbAccessImpl.retrieve(connection, query);
+			if (rs.isEmpty()) {
+				
+			} else {
+				
+			}
 		}
 	}
 
