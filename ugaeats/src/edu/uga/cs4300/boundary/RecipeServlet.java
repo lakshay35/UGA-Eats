@@ -1,6 +1,9 @@
 package edu.uga.cs4300.boundary;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import edu.uga.cs4300.logiclayer.RecipeLogicImpl;
+import edu.uga.cs4300.persistlayer.DbAccessImpl;
 
 /**
  * Servlet implementation class RecipeServlet
@@ -42,40 +46,34 @@ public class RecipeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		String signup = request.getParameter("signup");
+		String signin = request.getParameter("signon");
+		System.out.println("hey");
+		System.out.println(signup);
+		if (signup != null)
+		{
+			System.out.println(signup);
+			addNewUser(request, response);
+		}
+		else if (signin != null)
+		{
+			
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String signup = request.getParameter("signup");
-		String signin = request.getParameter("signon");
-		
-		if (signup != null)
-		{
-			addNewUser(request, response);
-		}
-		else if (signin != null)
-		{
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			
-			Connection connection = DbAccessImpl.connect();
-			String query = "SELECT * FROM users WHERE username = " + username + " AND password = " + password;
-			ResultSet rs = DbAccessImpl.retrieve(connection, query);
-			if (rs.isEmpty()) {
-				
-			} else {
-				
-			}
-		}
+		doGet(request, response);
 	}
-
+	
 	private void addNewUser(HttpServletRequest request, HttpServletResponse response) {
-		String fname = request.getParameter("firstname");
-		String lname = request.getParameter("lastname");
+		String fname = request.getParameter("firstName");
+		String lname = request.getParameter("lastName");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");

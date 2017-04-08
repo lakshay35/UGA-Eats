@@ -12,6 +12,7 @@ public class RecipeLogicImpl {
 	
 	public int addUser(String first_name, String last_name, String username, String password, String email) {
 		User u = new User(first_name, last_name, username, password, email);
+		System.out.println("adduser");
 		return userPersist.persistUser(u);
 	}
 }

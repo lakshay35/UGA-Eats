@@ -13,6 +13,7 @@ public class RecipePersistImpl {
 				+ u.getUsername() + "','" + u.getPassword() + "','" + u.getEmail() + "')";
 		int temp = DbAccessImpl.create(c,  query);
 		DbAccessImpl.disconnect(c);
+		System.out.println(temp);
 		return temp;
 	} // persistUser()
 

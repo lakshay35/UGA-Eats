@@ -14,8 +14,8 @@ public abstract class DbAccessConfiguration {
 	
 	protected static final String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/recipedb";
 	
-	protected static final String DB_CONNECTION_USERNAME = "demo";
+	protected static final String DB_CONNECTION_USERNAME = "root";
 	
-	protected static final String DB_CONNECTION_PASSWORD = "demo";
+	protected static final String DB_CONNECTION_PASSWORD = "Copper13!";
 
 }
