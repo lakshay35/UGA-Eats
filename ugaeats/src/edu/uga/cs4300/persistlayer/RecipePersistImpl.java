@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uga.cs4300.objectlayer.Review;
 import edu.uga.cs4300.objectlayer.User;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
@@ -29,47 +28,26 @@ public class RecipePersistImpl {
 		return temp;
 	} // persistUser()
 	
-	public void openHomePage(String firstName) {
-		Connection connection = DbAccessImpl.connect();
-		Template template = null;
-		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
-		SimpleHash root = new SimpleHash(df.build());
-		PrintWriter out = null;
+	public User checkUser(String username, String password) {
+		Connection connect = DbAccessImpl.connect();
+		User temp = null;
+		String query = "SELECT * FROM users WHERE username = " + username + " AND password = " + password;
+		ResultSet rs = DbAccessImpl.retrieve(connect, query);
 		try {
-			root.put("fname", firstName);
-			out = response.getWriter();
-			String templateName = "homepage.ftl";
-			template = cfg.getTemplate(templateName);
-			response.setContentType("text/html");
-			template.process(root, out);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (TemplateException e) {
-			e.printStackTrace();
+		if (!rs.next()) {
+		} else {
+			String firstName = rs.getString("first_name");
+			String lastName = rs.getString("last_name");
+			String userName = rs.getString("username");
+			String passWord = rs.getString("password");
+			String email = rs.getString("email");
+			int id = rs.getInt("id");
+			temp = new User(id, firstName, lastName, userName, passWord, email);
+		}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void reloadLoginPage() {
-		Connection connection = DbAccessImpl.connect();
-		Template template = null;
-		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
-		SimpleHash root = new SimpleHash(df.build());
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			String templateName = "signin.ftl";
-			template = cfg.getTemplate(templateName);
-			response.setContentType("text/html");
-			template.process(root, out);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (TemplateException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		return temp;
 	}
 
 	

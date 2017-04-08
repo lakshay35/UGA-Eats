@@ -17,20 +17,7 @@ public class RecipeLogicImpl {
 		return userPersist.persistUser(u);
 	}
 	
-	public void validateLogin(String username, String password) {
-		Connection connection = DbAccessImpl.connect();
-		String query = "SELECT * FROM users WHERE username = " + username + " AND password = " + password;
-		ResultSet rs = DbAccessImpl.retrieve(connection, query);
-		if (rs.isEmpty()) {
-			userPersist.reloadLoginPage();
-		} else {
-			String firstName;
-			while(rs.next()) {
-				firstName = rs.getString("firstName");
-			}
-			userPersist.openHomePage(firstName);
-		}
-		
-		DbAccessImpl.disconnect(connection);
+	public User validateLogin(String username, String password) {
+		return userPersist.checkUser(username, password);
 	}
 }

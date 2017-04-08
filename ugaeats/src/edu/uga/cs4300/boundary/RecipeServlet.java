@@ -1,6 +1,7 @@
 package edu.uga.cs4300.boundary;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -14,7 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import edu.uga.cs4300.logiclayer.RecipeLogicImpl;
+import edu.uga.cs4300.objectlayer.User;
 import edu.uga.cs4300.persistlayer.DbAccessImpl;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapperBuilder;
+import freemarker.template.SimpleHash;
+import freemarker.template.Template;
 
 /**
  * Servlet implementation class RecipeServlet
@@ -62,7 +68,12 @@ public class RecipeServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			RecipeLogicImpl loginUser = new RecipeLogicImpl();
-			loginUser.validateLogin(username, password);
+			User user = loginUser.validateLogin(username, password);
+			if(user != null) {
+				openHomePage(user.getFirst_name(), request, response);
+			} else {
+				reloadLoginPage(request, response);
+			}
 		}
 	}
 
@@ -72,6 +83,20 @@ public class RecipeServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+	}
+
+	public void openHomePage(String firstName, HttpServletRequest request, HttpServletResponse response) {
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		String templateName = "homepage.ftl";
+		process.processTemplate(templateName, root, request, response);
+	}
+	
+	public void reloadLoginPage(HttpServletRequest request, HttpServletResponse response) {
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		String templateName = "signin.ftl";
+		process.processTemplate(templateName, root, request, response);
 	}
 	
 	private void addNewUser(HttpServletRequest request, HttpServletResponse response) {
