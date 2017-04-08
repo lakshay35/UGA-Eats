@@ -1,6 +1,5 @@
 package edu.uga.cs4300.logiclayer;
 
-import javax.jms.Connection;
 
 import edu.uga.cs4300.objectlayer.User;
 import edu.uga.cs4300.persistlayer.RecipePersistImpl;

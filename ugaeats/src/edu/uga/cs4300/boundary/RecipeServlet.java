@@ -1,9 +1,7 @@
 package edu.uga.cs4300.boundary;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,16 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import edu.uga.cs4300.logiclayer.RecipeLogicImpl;
 import edu.uga.cs4300.objectlayer.User;
-import edu.uga.cs4300.persistlayer.DbAccessImpl;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleHash;
-import freemarker.template.Template;
 
 /**
  * Servlet implementation class RecipeServlet
@@ -55,12 +52,9 @@ public class RecipeServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String signup = request.getParameter("signup");
-		String signin = request.getParameter("signon");
-		System.out.println("hey");
-		System.out.println(signup);
+		String signin = request.getParameter("signin");
 		if (signup != null)
 		{
-			System.out.println(signup);
 			addNewUser(request, response);
 		}
 		else if (signin != null)
@@ -69,9 +63,13 @@ public class RecipeServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			RecipeLogicImpl loginUser = new RecipeLogicImpl();
 			User user = loginUser.validateLogin(username, password);
+			System.out.println("hey");
 			if(user != null) {
-				openHomePage(user.getFirst_name(), request, response);
-			} else {
+				openHomePage(user, request, response);
+				System.out.println(user.getFirst_name());
+			} else 
+			{
+				System.out.println("heyelse");
 				reloadLoginPage(request, response);
 			}
 		}
@@ -85,10 +83,23 @@ public class RecipeServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void openHomePage(String firstName, HttpServletRequest request, HttpServletResponse response) {
+	public void openHomePage(User user, HttpServletRequest request, HttpServletResponse response) {
 		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
 		SimpleHash root = new SimpleHash(df.build());
 		String templateName = "homepage.ftl";
+		
+		HttpSession session = request.getSession();
+		synchronized(session) {
+			
+			session.setAttribute("id", user.getId());
+			session.setAttribute("firstName", user.getFirst_name());
+			session.setAttribute("lastName", user.getLast_name());
+			session.setAttribute("username", user.getUsername());
+			session.setAttribute("email", user.getEmail());
+		}
+		root.put("fname", session.getAttribute("firstName"));
+		root.put("checklogin", 1);
+		
 		process.processTemplate(templateName, root, request, response);
 	}
 	

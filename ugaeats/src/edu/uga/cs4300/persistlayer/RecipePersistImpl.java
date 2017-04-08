@@ -1,19 +1,10 @@
 package edu.uga.cs4300.persistlayer;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.uga.cs4300.objectlayer.User;
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapperBuilder;
-import freemarker.template.SimpleHash;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 
 public class RecipePersistImpl {
 
@@ -24,14 +15,13 @@ public class RecipePersistImpl {
 				+ u.getUsername() + "','" + u.getPassword() + "','" + u.getEmail() + "')";
 		int temp = DbAccessImpl.create(c,  query);
 		DbAccessImpl.disconnect(c);
-		System.out.println(temp);
 		return temp;
 	} // persistUser()
 	
 	public User checkUser(String username, String password) {
 		Connection connect = DbAccessImpl.connect();
 		User temp = null;
-		String query = "SELECT * FROM users WHERE username = " + username + " AND password = " + password;
+		String query = "SELECT * FROM users WHERE username = " + "'" + username + "'" + " AND password = " + "'" + password + "'";
 		ResultSet rs = DbAccessImpl.retrieve(connect, query);
 		try {
 		if (!rs.next()) {
