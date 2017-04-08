@@ -62,11 +62,58 @@ public class RecipeServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			RecipeLogicImpl loginUser = new RecipeLogicImpl();
-			loginUser.validateLogin(username, password);
-			
+			User user = loginUser.validateLogin(username, password);
+			if(user != null) {
+				openHomePage(user.firstName);
+			} else {
+				reloadLoginPage();
+			}
 		}
 	}
 
+	public void openHomePage(String firstName) {
+		Connection connection = DbAccessImpl.connect();
+		Template template = null;
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		PrintWriter out = null;
+		try {
+			root.put("fname", firstName);
+			out = response.getWriter();
+			String templateName = "homepage.ftl";
+			template = cfg.getTemplate(templateName);
+			response.setContentType("text/html");
+			template.process(root, out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void reloadLoginPage() {
+		Connection connection = DbAccessImpl.connect();
+		Template template = null;
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			String templateName = "signin.ftl";
+			template = cfg.getTemplate(templateName);
+			response.setContentType("text/html");
+			template.process(root, out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void addNewUser(HttpServletRequest request, HttpServletResponse response) {
 		String fname = request.getParameter("firstname");
 		String lname = request.getParameter("lastname");

@@ -28,47 +28,24 @@ public class RecipePersistImpl {
 		return temp;
 	} // persistUser()
 	
-	public void openHomePage(String firstName) {
-		Connection connection = DbAccessImpl.connect();
-		Template template = null;
-		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
-		SimpleHash root = new SimpleHash(df.build());
-		PrintWriter out = null;
-		try {
-			root.put("fname", firstName);
-			out = response.getWriter();
-			String templateName = "homepage.ftl";
-			template = cfg.getTemplate(templateName);
-			response.setContentType("text/html");
-			template.process(root, out);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (TemplateException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public User checkUser(String username, String password) {
+		Connection connect = DbAccessImpl.connect();
+		User temp = null;
+		String query = "SELECT * FROM users WHERE username = " + username + " AND password = " + password;
+		ResultSet rs = DbAccessImpl.retrieve(connection, query);
+		int result;
+		if (!rs.next()) {
+			result = 0;
+		} else {
+			String firstName = rs.getString("first_name");
+			String lastName = rs.getString("last_name");
+			String username = rs.getString("username");
+			String password = rs.getString("password");
+			String email = rs.getString("email");
+			int id = rs.getInt("id");
+			temp = User(id, firstName, lastName, username, password, email);
 		}
-	}
-	
-	public void reloadLoginPage() {
-		Connection connection = DbAccessImpl.connect();
-		Template template = null;
-		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
-		SimpleHash root = new SimpleHash(df.build());
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			String templateName = "signin.ftl";
-			template = cfg.getTemplate(templateName);
-			response.setContentType("text/html");
-			template.process(root, out);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (TemplateException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		return temp;
 	}
 
 	
