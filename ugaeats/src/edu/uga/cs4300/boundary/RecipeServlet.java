@@ -59,6 +59,13 @@ public class RecipeServlet extends HttpServlet {
 		}
 		else if (signin != null)
 		{
+<<<<<<< HEAD
+=======
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			RecipeLogicImpl loginUser = new RecipeLogicImpl();
+			loginUser.validateLogin(username, password);
+>>>>>>> origin/master
 			
 		}
 	}
