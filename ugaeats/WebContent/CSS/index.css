@@ -5,4 +5,28 @@
 
 .formHome {
 	display: inline;
+	margin-right: 20px;
+}
+
+.green {
+	background-color: lightgreen;
+	height: 200px;
+	position: relative;
+}
+
+.green img {
+	display: block;
+    margin: auto;
+}
+
+.buttons  {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+}
+
+.sign {
+	top: 0;
+	right: 0;
+	position: absolute;
 }
