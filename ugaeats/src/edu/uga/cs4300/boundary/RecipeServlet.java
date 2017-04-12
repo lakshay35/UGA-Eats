@@ -53,6 +53,9 @@ public class RecipeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String signup = request.getParameter("signup");
 		String signin = request.getParameter("signin");
+		String home = request.getParameter("home");
+		String viewRecipes = request.getParameter("viewRecipe");
+		
 		if (signup != null)
 		{
 			addNewUser(request, response);
@@ -63,15 +66,67 @@ public class RecipeServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			RecipeLogicImpl loginUser = new RecipeLogicImpl();
 			User user = loginUser.validateLogin(username, password);
-			System.out.println("hey");
 			if(user != null) {
 				openHomePage(user, request, response);
-				System.out.println(user.getFirst_name());
 			} else 
 			{
-				System.out.println("heyelse");
 				reloadLoginPage(request, response);
 			}
+		}
+		else if (home != null)
+		{
+			goToHome(request, response);
+		}
+		else if (viewRecipes != null)
+		{
+			viewRecipes(request, response);
+		}
+	}
+
+	private void viewRecipes(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		if (session == null)
+		{
+			System.out.println("no session and view recipes works");
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			String templateName = "viewrecipe.ftl";
+			root.put("checklogin", 0);
+			root.put("fname", "Not Logged In");
+			process.processTemplate(templateName, root, request, response);
+		}
+		else
+		{
+			HttpSession session2 = request.getSession(false);
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			String templateName = "viewrecipe.ftl";
+			root.put("fname", session2.getAttribute("firstName"));
+			root.put("checklogin", 1);
+			process.processTemplate(templateName, root, request, response);
+		}
+	}
+
+	private void goToHome(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		if (session == null)
+		{
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			String templateName = "homepage.ftl";
+			root.put("checklogin", 0);
+			root.put("fname", "Not Logged In");
+			process.processTemplate(templateName, root, request, response);
+		}
+		else
+		{
+			HttpSession session2 = request.getSession(false);
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			String templateName = "homepage.ftl";
+			root.put("fname", session2.getAttribute("firstName"));
+			root.put("checklogin", 1);
+			process.processTemplate(templateName, root, request, response);
 		}
 	}
 
