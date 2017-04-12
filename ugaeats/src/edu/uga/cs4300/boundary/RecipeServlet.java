@@ -75,6 +75,7 @@ public class RecipeServlet extends HttpServlet {
 			}
 		}
 		else if(createrecipe != null) {
+			System.out.println("recipecreated");
 			createRecipe(request,response);
 		}
 	}

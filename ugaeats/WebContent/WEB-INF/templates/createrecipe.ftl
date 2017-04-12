@@ -20,6 +20,11 @@
   			  List the steps for your recipe: <br />
   			    <input type="text" name="steps">
   			<br />
+  			Please choose the visibility for your recipe: <br />
+  			  <input type="radio" name="visibility" value="public"> Public
+			  <input type="radio" name="visibility" value="private"> Private
+			<br />
+  			
   			<input type="submit">
 		</form>
 	</div>
