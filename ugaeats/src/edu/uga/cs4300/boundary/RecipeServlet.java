@@ -55,6 +55,7 @@ public class RecipeServlet extends HttpServlet {
 		String signin = request.getParameter("signin");
 		String home = request.getParameter("home");
 		String viewRecipes = request.getParameter("viewRecipe");
+		String createrecipe = request.getParameter("createButton");
 		
 		if (signup != null)
 		{
@@ -80,6 +81,9 @@ public class RecipeServlet extends HttpServlet {
 		else if (viewRecipes != null)
 		{
 			viewRecipes(request, response);
+		}
+		else if(createrecipe != null) {
+			createRecipe(request, response);
 		}
 	}
 
@@ -183,6 +187,29 @@ public class RecipeServlet extends HttpServlet {
 		}
 	}
 	
+	public void createRecipe(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		if (session == null)
+		{
+			System.out.println("no session and create recipes works");
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			String templateName = "createrecipe.ftl";
+			root.put("checklogin", 0);
+			root.put("fname", "Not Logged In");
+			process.processTemplate(templateName, root, request, response);
+		}
+		else
+		{
+			HttpSession session2 = request.getSession(false);
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			String templateName = "createrecipe.ftl";
+			root.put("fname", session2.getAttribute("firstName"));
+			root.put("checklogin", 1);
+			process.processTemplate(templateName, root, request, response);
+		}
+	}
 
 		
 
