@@ -13,6 +13,7 @@ public class Recipe {
 	private Blob image;
 	private List<String> ingredients;
 	private List<String> instructions;
+	private String username;
 	
 	public Recipe(int id, String name, String permission, float rank, int num_ratings,
 			 int users_id, Blob image, List<String> ingredients, List<String> instructions)
@@ -27,6 +28,23 @@ public class Recipe {
 		this.setIngredients(ingredients);
 		this.setInstructions(instructions);
 	}
+	
+	public Recipe(int id, String name, float rank, String username, Blob image) {
+		this.setId(id);
+		this.setName(name);
+		this.setRank(rank);
+		this.setUsername(username);
+		this.setImage(image);
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	
 	public Blob getImage() {
 		return image;

@@ -1,6 +1,9 @@
 package edu.uga.cs4300.logiclayer;
 
 
+import java.util.List;
+
+import edu.uga.cs4300.objectlayer.Recipe;
 import edu.uga.cs4300.objectlayer.User;
 import edu.uga.cs4300.persistlayer.RecipePersistImpl;
 
@@ -19,4 +22,9 @@ public class RecipeLogicImpl {
 	public User validateLogin(String username, String password) {
 		return userPersist.checkUser(username, password);
 	}
+	
+	public List<Recipe> retrieveRecipes() {
+		return userPersist.getRecipes();
+	}
+
 }

@@ -20,6 +20,16 @@
 			</#if>
 		</form>
 	</div>
-	<div>RecipeHolder</div>
+	<div>
+		<form action="RecipeServlet" method="post">
+		<div class="searchDiv">
+			<input type="text" name="searchTerm"/>
+			<input type="button" value="Search" name="searchButton"/>
+			<input type="button" value="Create Recipe" name="createButton"/>
+		</div>
+		</form>
+	</div>
+	<div>RecipeListHolder</div>
+	<div>Recipe View</div>
 </body>
 </html>
