@@ -25,7 +25,7 @@
 		<div class="searchDiv">
 			<input type="text" name="searchTerm"/>
 			<input type="button" value="Search" name="searchButton"/>
-			<input type="submit" value="Create Recipe" name="createButton"/>
+			<input type="button" value="Create Recipe" name="createButton"/>
 		</div>
 		</form>
 	</div>

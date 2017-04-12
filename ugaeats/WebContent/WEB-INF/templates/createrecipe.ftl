@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div>
-		<form class="formHome" action="/RecipeServlet" method="post" enctype="multipart/form-data">
+		<form class="formHome" action="/RecipeServlet" method="post">
 			Enter a name for your recipe:  <br />
 			  <input type="text" name="recipename">
 			  <br />

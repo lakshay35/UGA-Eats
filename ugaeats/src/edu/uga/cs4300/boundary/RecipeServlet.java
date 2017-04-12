@@ -1,6 +1,5 @@
 package edu.uga.cs4300.boundary;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
@@ -56,7 +55,6 @@ public class RecipeServlet extends HttpServlet {
 		String signin = request.getParameter("signin");
 		String home = request.getParameter("home");
 		String viewRecipes = request.getParameter("viewRecipe");
-		String createNew = request.getParameter("createrecipe");
 		
 		if (signup != null)
 		{
@@ -83,19 +81,6 @@ public class RecipeServlet extends HttpServlet {
 		{
 			viewRecipes(request, response);
 		}
-		else if (createNew != null)
-		{
-			createNewRecipe(request, response);
-		}
-	}
-
-	private void createNewRecipe(HttpServletRequest request, HttpServletResponse response) {
-		byte[] image = request.getParameter("pic").getBytes();
-		String name = request.getParameter("recipename");
-		String[] ingredients = request.getParameterValues("ingredients");
-		String[] steps = request.getParameterValues("steps");
-		String visibility = request.getParameter("visibility");
-		
 	}
 
 	private void viewRecipes(HttpServletRequest request, HttpServletResponse response) {
