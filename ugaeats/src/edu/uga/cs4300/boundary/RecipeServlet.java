@@ -53,7 +53,6 @@ public class RecipeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String signup = request.getParameter("signup");
 		String signin = request.getParameter("signin");
-		String createrecipe = request.getParameter("createrecipe");
 		if (signup != null)
 		{
 			addNewUser(request, response);
@@ -73,10 +72,6 @@ public class RecipeServlet extends HttpServlet {
 				System.out.println("heyelse");
 				reloadLoginPage(request, response);
 			}
-		}
-		else if(createrecipe != null) {
-			System.out.println("recipecreated");
-			createRecipe(request,response);
 		}
 	}
 
@@ -133,11 +128,6 @@ public class RecipeServlet extends HttpServlet {
 		}
 	}
 	
-	public void createRecipe(HttpServletRequest request, HttpServletResponse response) {
-		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
-		SimpleHash root = new SimpleHash(df.build());
-		String templateName = "createrecipe.ftl";
-		process.processTemplate(templateName, root, request, response);	}
 
 		
 
