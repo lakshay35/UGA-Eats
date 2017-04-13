@@ -58,7 +58,7 @@ public class RecipeServlet extends HttpServlet {
 		String signin = request.getParameter("signin");
 		String home = request.getParameter("home");
 		String viewRecipes = request.getParameter("viewRecipe");
-		String createrecipe = request.getParameter("createrecipe");
+		String createNewRecipe = request.getParameter("createrecipe");
 		
 		if (signup != null)
 		{
@@ -85,13 +85,17 @@ public class RecipeServlet extends HttpServlet {
 		{
 			viewRecipes(request, response);
 		}
-		else if (createrecipe != null)
+		else if (createNewRecipe != null)
 		{
 			createNewRecipe(request, response);
 		}
 	}
 
 	private void createNewRecipe(HttpServletRequest request, HttpServletResponse response) {
+		String name = request.getParameter("recipename");
+		String[] ingredients = request.getParameterValues("ingredients");
+		String[] instructions = request.getParameterValues("steps");
+		String permission = request.getParameter("visibility");
 		byte[] image = request.getParameter("pic").getBytes();
 		Blob blob = null;
 		try {
