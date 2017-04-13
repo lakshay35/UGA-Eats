@@ -1,6 +1,8 @@
 package edu.uga.cs4300.boundary;
 
 import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.ServletConfig;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
 
 import com.google.gson.Gson;
 
@@ -55,6 +58,7 @@ public class RecipeServlet extends HttpServlet {
 		String signin = request.getParameter("signin");
 		String home = request.getParameter("home");
 		String viewRecipes = request.getParameter("viewRecipe");
+		String createrecipe = request.getParameter("createrecipe");
 		
 		if (signup != null)
 		{
@@ -80,6 +84,21 @@ public class RecipeServlet extends HttpServlet {
 		else if (viewRecipes != null)
 		{
 			viewRecipes(request, response);
+		}
+		else if (createrecipe != null)
+		{
+			createNewRecipe(request, response);
+		}
+	}
+
+	private void createNewRecipe(HttpServletRequest request, HttpServletResponse response) {
+		byte[] image = request.getParameter("pic").getBytes();
+		Blob blob = null;
+		try {
+			blob = new SerialBlob(image);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
