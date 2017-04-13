@@ -88,6 +88,7 @@ public class RecipeServlet extends HttpServlet {
 		if (session == null)
 		{
 			System.out.println("no session and view recipes works");
+			System.out.println("github branch");
 			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
 			SimpleHash root = new SimpleHash(df.build());
 			String templateName = "viewrecipe.ftl";
