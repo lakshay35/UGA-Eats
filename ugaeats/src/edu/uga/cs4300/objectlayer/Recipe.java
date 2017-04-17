@@ -11,6 +11,7 @@ public class Recipe {
 	private int num_ratings;
 	private int users_id;
 	private Blob image;
+	private String image64;
 	private List<String> ingredients;
 	private List<String> instructions;
 	private String username;
@@ -29,12 +30,34 @@ public class Recipe {
 		this.setInstructions(instructions);
 	}
 	
-	public Recipe(int id, String name, float rank, String username, Blob image) {
+	public Recipe(int id, String name, float rank, String username, Blob image, int user_id) {
 		this.setId(id);
 		this.setName(name);
 		this.setRank(rank);
 		this.setUsername(username);
 		this.setImage(image);
+		this.setUsers_id(user_id);
+	}
+
+	public Recipe(int id2, String name2, float rank2, String username2, String image642, int user_id) {
+		this.setId(id2);
+		this.setName(name2);
+		this.setRank(rank2);
+		this.setUsername(username2);
+		this.setImage64(image642);
+		this.setUsers_id(user_id);
+	}
+	
+	public Recipe(int id2, String name2, float rank2, String username2, String image642, int user_id, List<String> ingredients, List<String> 
+	instructions) {
+		this.setId(id2);
+		this.setName(name2);
+		this.setRank(rank2);
+		this.setUsername(username2);
+		this.setImage64(image642);
+		this.setUsers_id(user_id);
+		this.setIngredients(ingredients);
+		this.setInstructions(instructions);
 	}
 
 	public String getUsername() {
@@ -99,6 +122,14 @@ public class Recipe {
 	}
 	public void setInstructions(List<String> instructions) {
 		this.instructions = instructions;
+	}
+
+	public String getImage64() {
+		return image64;
+	}
+
+	public void setImage64(String image64) {
+		this.image64 = image64;
 	}
 	
 	
