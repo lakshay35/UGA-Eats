@@ -1,6 +1,7 @@
 package edu.uga.cs4300.logiclayer;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.uga.cs4300.objectlayer.Recipe;
@@ -25,6 +26,11 @@ public class RecipeLogicImpl {
 	
 	public List<Recipe> retrieveRecipes() {
 		return userPersist.getRecipes();
+	}
+	
+	public ArrayList<Recipe> getMyRecipes(int userID)
+	{
+		return userPersist.persistMyRecipes(userID);
 	}
 
 }

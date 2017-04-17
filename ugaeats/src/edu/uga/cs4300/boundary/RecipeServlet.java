@@ -56,6 +56,7 @@ public class RecipeServlet extends HttpServlet {
 		String home = request.getParameter("home");
 		String viewRecipes = request.getParameter("viewRecipe");
 		String createrecipe = request.getParameter("createButton");
+		String viewProfile = request.getParameter("viewProfile");
 		
 		if (signup != null)
 		{
@@ -85,6 +86,15 @@ public class RecipeServlet extends HttpServlet {
 		else if(createrecipe != null) {
 			createRecipe(request, response);
 		}
+		else if(viewProfile != null)
+		{
+			viewProfile(request, response);
+		}
+	}
+	
+	private void viewProfile(HttpServletRequest request, HttpServletResponse response)
+	{
+		
 	}
 
 	private void viewRecipes(HttpServletRequest request, HttpServletResponse response) {

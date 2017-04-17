@@ -36,6 +36,14 @@ public class Recipe {
 		this.setUsername(username);
 		this.setImage(image);
 	}
+	
+	public Recipe(int id, String name, float rank, int numRating, List<String> ingredient) {
+		this.setId(id);
+		this.setName(name);
+		this.setRank(rank);
+		this.setNum_ratings(numRating);
+		this.setIngredients(ingredient);
+	}
 
 	public String getUsername() {
 		return username;
