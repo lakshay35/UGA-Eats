@@ -3,6 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>UGA Eats</title>
+<script src="JS/jquery.js" type="text/javascript"></script>
+<script src="JS/recipe.js" type="text/javascript"></script>
 <link href="CSS/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -20,6 +22,7 @@
 			</#if>
 		</form>
 	</div>
-	<div>RecipeHolder</div>
+	<div id="recipeHolder">RecipeHolder</div>
+	<div id="recipeViewer">RecipeViewer</div>
 </body>
 </html>
