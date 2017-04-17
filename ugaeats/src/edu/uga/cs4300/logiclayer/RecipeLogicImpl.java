@@ -1,6 +1,8 @@
 package edu.uga.cs4300.logiclayer;
 
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.List;
 
 import edu.uga.cs4300.objectlayer.Recipe;
@@ -27,4 +29,20 @@ public class RecipeLogicImpl {
 		return userPersist.getRecipes();
 	}
 
+	public int createRecipe(String recipeName, List<String> ingredients, List<String> instructions, String permission,
+			int user_id, InputStream fileContent) {
+		return userPersist.addRecipeToDatabase(recipeName, ingredients, instructions, permission, user_id, fileContent);
+	}
+
+	public List<Recipe> getImages() {
+		return userPersist.getImages();
+	}
+
+	public Recipe getRecipeById(int id) {
+		return userPersist.getRecipe(id);
+	}
+
+	/*public List<Recipe> retrievePopularRecipes() {
+		return userPersist.getPopularRecipes();
+	}*/
 }
