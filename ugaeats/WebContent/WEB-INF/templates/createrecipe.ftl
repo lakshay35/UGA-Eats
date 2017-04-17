@@ -3,11 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Create a Recipe</title>
+<script src="JS/jquery.js" type="text/javascript"></script>
+<script src="JS/recipe.js" type="text/javascript"></script>
 <link href="CSS/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 	<div>
-		<form class="formHome" action="/RecipeServlet" method="post" enctype="multipart/form-data">
+		<form class="formHome" action="RecipeServlet" method="post" enctype="multipart/form-data">
 			Enter a name for your recipe:  <br />
 			  <input type="text" name="recipename">
 			  <br />
