@@ -8,6 +8,7 @@
 <body>
 	<div>
 		<form class="formHome" action="RecipeServlet" method="get">
+		<div>
 			<button class="left" name="home">Home</button>
 			<button class="left" name="viewRecipe">View Recipes</button>
 			<button class="left">View Profile</button>
@@ -18,14 +19,11 @@
 			<p class="right">${fname}</p>
 			<button name="logout">Logout</button>
 			</#if>
-		</form>
-	</div>
-	<div>
-		<form action="RecipeServlet" method="post">
+		</div>
 		<div class="searchDiv">
 			<input type="text" name="searchTerm"/>
 			<input type="button" value="Search" name="searchButton"/>
-			<input type="button" value="Create Recipe" name="createButton"/>
+			<input type="submit" value="Create Recipe" name="createButton"/>
 		</div>
 		</form>
 	</div>
